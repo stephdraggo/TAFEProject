@@ -9,6 +9,8 @@ namespace Jim //it's life
         [Header("Life")]
         public string characterName;
         public AiBehaviour behaviour;
+        public float moveSpeed, aggroRadius, attackRadius;
+        public bool speedBonus;
         #region stat structs
         [Serializable]
         public struct LifeForce //health, mana, stamina
@@ -25,21 +27,21 @@ namespace Jim //it's life
         }
         #endregion
         #region AI Behaviours
-        void Wander()
+        public void Wander()
         {
-            behaviour = AiBehaviour.Wandering; //this is all wrong
+            speedBonus = false;
         }
-        void AvoidCollision()
+        public void AvoidCollision()
         {
 
         }
-        void Flee()
+        public void Flee()
         {
-            behaviour = AiBehaviour.Fleeing;
+            speedBonus = true;
         }
-        void Evade()
+        public void Evade()
         {
-
+            speedBonus = true;
         }
         #endregion
     }

@@ -13,8 +13,8 @@ namespace Jim //it's life
         void Start()
         {
             behaviour = AiBehaviour.Player;
+            speedBonus = false;
         }
-
         void Update()
         {
 

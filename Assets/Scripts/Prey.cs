@@ -11,19 +11,27 @@ namespace Jim //it's life
         #endregion
         void Start()
         {
-
+            behaviour = AiBehaviour.Wandering;
         }
 
         void Update()
         {
+            //if predator/player in aggro radius
+            //flee
 
+            //if predator/player in attack radius
+            //evade
+
+            //if health low and not in attack radius
+            //hide
+
+            //else
+            //wander
         }
         #region Behaviours
         void Hide()
         {
-            //if fleeing and gets far away enough
-            //waits and then wander
-            behaviour = AiBehaviour.Hidden;
+            speedBonus = false;
         }
         void OffsetPursuit() //idk what this one means so idk wether for prey or predator
         {
