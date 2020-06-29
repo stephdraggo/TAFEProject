@@ -11,8 +11,8 @@ namespace Settings
     public class SceneControl : MonoBehaviour
     {
         #region Variables
-        private string sceneName;
         [Header("Variables")]
+        public string sceneName;
         public bool gamePaused;
         public GameObject[] panels;
         //game scene panels: HUD, Pause, Options, Loading, Inventory, Quests
