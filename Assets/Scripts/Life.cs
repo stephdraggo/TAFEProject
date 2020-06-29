@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 namespace Jim //it's life
 {
+    [AddComponentMenu("Game Systems/Life/Life")]
     public class Life : MonoBehaviour
     {
         [Header("Life")]
@@ -42,6 +43,10 @@ namespace Jim //it's life
         public void Evade()
         {
             speedBonus = true;
+        }
+        public void TakeDamage()
+        {
+
         }
         #endregion
     }

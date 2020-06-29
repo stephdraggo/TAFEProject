@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Jim //it's life
 {
+    [AddComponentMenu("Game Systems/Life/Prey")]
     public class Prey : Life
     {
         #region Variables

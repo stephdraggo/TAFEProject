@@ -4,9 +4,11 @@ using UnityEngine;
 
 namespace Jim //it's life
 {
+    [AddComponentMenu("Game Systems/Life/Predator")]
     public class Predator : Life
     {
         #region Variables
+        public float attackDamage;
         public Vector3[] territoryPatrol;
         public LifeForce[] lifeForce = new LifeForce[2]; //health, stamina
         #endregion
