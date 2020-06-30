@@ -65,10 +65,18 @@ AssignmentPDFs/
 
 *.drawio
 
-GameFiles/obj/
+GameFiles/Library/
 
 GameFiles/Logs/
 
-GameFiles/Library/
+GameFiles/Temp/
 
-GameFiles/.vscode/
+GameFiles/ProjectSettings/AudioManager.asset
+
+GameFiles/ProjectSettings/ClusterInputManager.asset
+
+GameFiles/ProjectSettings/DynamicsManager.asset
+
+GameFiles/ProjectSettings/EditorBuildSettings.asset
+
+GameFiles/ProjectSettings/EditorSettings.asset
