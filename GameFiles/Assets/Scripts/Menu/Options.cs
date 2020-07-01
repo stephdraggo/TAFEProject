@@ -23,9 +23,9 @@ namespace Settings
             //expose sound parameters
             //figure out how to make the mute toggle better
             //figure out click sounds
-            
+
             if (scene.sceneName == "MainMenu") //this may not work
-                //trying to prevent fullscreen from resetting every time I load a scene
+                                               //trying to prevent fullscreen from resetting every time I load a scene
             {
                 Screen.fullScreen = true;
             }
