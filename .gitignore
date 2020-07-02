@@ -74,3 +74,13 @@ GameFiles/Library/
 GameFiles/.vscode/
 
 GameFiles/Temp/
+
+TAFEProject/Library/
+
+TAFEProject/Temp/
+
+TAFEProject/Logs/
+
+TAFEProject/obj/
+
+TAFEProject/.vscode/
