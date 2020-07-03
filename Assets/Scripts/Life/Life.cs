@@ -24,7 +24,7 @@ namespace Jim //it's life
         public struct Stats //strength etc.
         {
             public string name;
-            public int value, tempValue;
+            public int value, baseValue, tempValue;
         }
         #endregion
         #region AI Behaviours
