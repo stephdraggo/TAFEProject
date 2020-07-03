@@ -7,3 +7,9 @@ public class DontDestroy : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 }
+public enum CharacterClass
+{
+    Fighter,
+    Rogue,
+    Witch
+}
