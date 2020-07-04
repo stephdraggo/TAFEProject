@@ -8,9 +8,19 @@ public class DontDestroy : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 }
+//and here are our global enums
 public enum CharacterClass
 {
     Fighter,
     Rogue,
     Witch
+}
+public enum AiBehaviour
+{
+    Player,
+    Wandering,
+    Fleeing,
+    Hidden,
+    Patrolling,
+    Chasing
 }

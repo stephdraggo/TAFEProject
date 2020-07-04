@@ -52,12 +52,3 @@ namespace Jim //it's life
         #endregion
     }
 }
-public enum AiBehaviour
-{
-    Player,
-    Wandering,
-    Fleeing,
-    Hidden,
-    Patrolling,
-    Chasing
-}
