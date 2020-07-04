@@ -15,7 +15,7 @@ namespace Jim //it's life
         [Header("Player Variables")]
         public CharacterController characterController;
         private Vector3 moveDirection = Vector3.zero;
-        public float jumpSpeed = 8f, crouchSpeed = 2f, sprintSpeed = 10f, gravity = 100f, horizontal, vertical;
+        public float jumpSpeed = 8f, crouchSpeed = 2f, sprintSpeed = 10f, gravity = 100f, horizontal, vertical, currentExp, neededExp, maxExp;
         public bool usingKeybinds;
         public static bool isDead;
         public string[] baseKeys;
@@ -23,7 +23,8 @@ namespace Jim //it's life
         [Header("Death")]
         public AudioSource deathSound;
         public AudioSource gameSound;
-        public GameObject deathPanel, hudPanel; //needed?
+        //need checkpoints
+        public string checkPoint;
         #endregion
         void Start()
         {

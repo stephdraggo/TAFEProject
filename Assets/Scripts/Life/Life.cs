@@ -9,6 +9,7 @@ namespace Jim //it's life
     {
         [Header("Life")]
         public string characterName;
+        public int level;
         public AiBehaviour behaviour;
         public float moveSpeed, aggroRadius, attackRadius;
         public bool speedBonus;
