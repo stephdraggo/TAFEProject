@@ -15,21 +15,26 @@ namespace Settings
         public Resolution[] resolutions;
         public AudioMixer audioControl;
         public AudioSource audioSource;
-        public bool muted;
-        private SceneControl scene; //may not work, see Start
+        public bool muted, savedOptions; //fullscreen?
+        public SceneControl sceneControl; //may not be needed, see Start
         #endregion
         void Start()
         {
             //expose sound parameters
             //figure out how to make the mute toggle better
             //figure out click sounds
-            
-            if (scene.sceneName == "MainMenu") //this may not work
-                //trying to prevent fullscreen from resetting every time I load a scene
+
+
+            if (savedOptions) //if there are saved options
             {
-                Screen.fullScreen = true;
+                //load from player prefs
             }
-            SetupRes();
+            else //if no saved options
+            {
+                //default settings go here
+                Screen.fullScreen = true; //fullscreen bool?
+            }
+            SetupRes(); //still don't know if this will reset every scene, test
         }
 
         void Update()
@@ -39,31 +44,31 @@ namespace Settings
         #region functions
         public void SetupRes() //set up the resolution options according to the screen
         {
-            resolutions = Screen.resolutions; //comment this code
-            resolutionSelect.ClearOptions();
-            List<string> options = new List<string>();
+            resolutions = Screen.resolutions; //fill the array with possibilities from this screen
+            resolutionSelect.ClearOptions(); //clear selection from dropdown
+            List<string> options = new List<string>(); //will hold dimensions text list
             int index = 0;
-            for (int i = 0; i < resolutions.Length; i++)
+            for (int i = 0; i < resolutions.Length; i++) //for every resolution option
             {
-                string option = resolutions[i].width + " x " + resolutions[i].height;
-                options.Add(option);
-                if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+                string option = resolutions[i].width + " x " + resolutions[i].height; //set dimensions text
+                options.Add(option); //add text to list
+                if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height) //if option is current dimensions
                 {
-                    index = i;
+                    index = i; //set current index
                 }
             }
-            resolutionSelect.AddOptions(options);
-            resolutionSelect.value = index;
-            resolutionSelect.RefreshShownValue();
+            resolutionSelect.AddOptions(options); //put all the options in the dropdown
+            resolutionSelect.value = index; //set the selected option to current dimensions index
+            resolutionSelect.RefreshShownValue(); //reload dropdown
         }
-        public void SetResolution(int index) //player changes resolution here
+        public void SetResolution(int i) //player changes resolution here
         {
-            Resolution res = resolutions[index];
-            Screen.SetResolution(res.width, res.height, Screen.fullScreen);
+            Screen.SetResolution(resolutions[i].width, resolutions[i].height, Screen.fullScreen); //why fullscreen?
         }
-        public void SetFullscreen(bool isFullscreen)
+        public void SetFullScreen(bool full)
         {
-            Screen.fullScreen = isFullscreen;
+            Screen.fullScreen = full;
+            //set bool?
         }
         #region sound
         public void SetMusicVolume(float volume)
@@ -94,6 +99,10 @@ namespace Settings
         public void SetGraphics(int index)
         {
             QualitySettings.SetQualityLevel(index);
+        }
+        public void SaveOptions()
+        {
+            //save to player prefs
         }
         #endregion
     }

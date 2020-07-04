@@ -15,7 +15,7 @@ namespace Settings
         public string sceneName;
         public bool gamePaused;
         public GameObject[] panels;
-        //game scene panels: HUD, Pause, Options, Loading, Inventory, Quests
+        //game scene panels: HUD, Pause, Options, Loading, Inventory, Quests, Death
         //menu scene panels: AnyKey, Main, Options, Loading
         [Header("Loading Screen")]
         public Image loadingPercentBar;
@@ -23,48 +23,61 @@ namespace Settings
         #endregion
         void Start()
         {
-            sceneName = SceneManager.GetActiveScene().name;
-            for (int i = 0; i < panels.Length; i++) //for all panels
-            {
-                panels[i].SetActive(false); //disable them
-            }
-            panels[0].SetActive(true); //enable HUD or AnyKey panel
+            sceneName = SceneManager.GetActiveScene().name; //get name of current scene
+            ActivateCorrectPanels(0); //only HUD or AnyKey
         }
 
         void Update()
         {
-            if(sceneName == "MainMenu")
+            #region Menu Scene
+            if (sceneName == "MainMenu") //if in menu scene
             {
-                if (panels[0].activeSelf)
+                if (panels[0].activeSelf) //if AnyKey panel active
                 {
-                    PressAnyKey();
+                    PressAnyKey(); //notice inputs
                 }
             }
-            if (sceneName == "GamePlay")
+            #endregion
+
+            #region Game Scene
+            if (sceneName == "GamePlay") //if in game scene
             {
-                PauseKey();
+                if (Jim.Player.isDead && !gamePaused) //if dead and calls only once
+                {
+                    Pause();
+                    ActivateCorrectPanels(6); //death panel
+                }
+                else if (Jim.Player.isDead) //if dead update
+                {
+
+                }
+                else //if alive
+                {
+                    PauseKey(); //notice pause keys
+                }
+
             }
+            #endregion
         }
         #region Functions
         #region shared functions
         public void QuitApplication()
         {
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
+#if UNITY_EDITOR //if in unity
+            UnityEditor.EditorApplication.isPlaying = false; //exit play mode
 #endif
-            Application.Quit();
+            Application.Quit(); //close app
         }
         public void ChangeScene(int sceneIndex)
         {
             StartCoroutine(LoadAsynchronously(sceneIndex));
-
         }
         IEnumerator LoadAsynchronously(int sceneIndex)
         {
             AsyncOperation loading = SceneManager.LoadSceneAsync(sceneIndex); //load this scene
             panels[4].SetActive(true); //enable loading screen
 
-            while (!loading.isDone)
+            while (!loading.isDone) //while not done loading
             {
                 float progress = Mathf.Clamp01(loading.progress / 0.9f); //loading progress
 
@@ -77,42 +90,44 @@ namespace Settings
         #region in-game functions
         public void Pause()
         {
-            gamePaused = true;
-            Time.timeScale = 0;
-            Cursor.lockState = CursorLockMode.None;
-            Cursor.visible = true;
+            gamePaused = true; //static bool set true
+            Time.timeScale = 0; //pause time
+            Cursor.lockState = CursorLockMode.None; //release mouse
+            Cursor.visible = true; //make mouse visible
         }
         public void Resume()
         {
-            gamePaused = false;
-            Time.timeScale = 1;
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            gamePaused = false; //static bool set false
+            Time.timeScale = 1; //time is passing at a normal rate
+            Cursor.lockState = CursorLockMode.Locked; //imobilise mouse
+            Cursor.visible = false; //make mouse invisible
         }
         public void PauseKey()
         {
-            if (Input.GetKeyDown(Controls.Keybinds.keys["Pause"]))
+            if (Input.GetKeyDown(Controls.Keybinds.keys["Pause"])) //if key 'pause'
             {
-                ActivateCorrectPanels(1);
+                ActivateCorrectPanels(1); //toggle pause panel
+                TogglePause();
             }
-            if (Input.GetKeyDown(Controls.Keybinds.keys["Inventory"]))
+            if (Input.GetKeyDown(Controls.Keybinds.keys["Inventory"])) //if key 'inventory'
             {
-                ActivateCorrectPanels(4);
+                ActivateCorrectPanels(4); //toggle inventory panel
+                TogglePause();
             }
-            if (Input.GetKeyDown(Controls.Keybinds.keys["Quest"]))
+            if (Input.GetKeyDown(Controls.Keybinds.keys["Quest"])) //if key 'quest'
             {
-                ActivateCorrectPanels(5);
+                ActivateCorrectPanels(5); //toggle quest panel
+                TogglePause();
             }
         }
         void TogglePause()
         {
-            gamePaused = !gamePaused;
-            if (gamePaused)
+            if (!gamePaused) //if bool false
             {
                 Pause();
                 return;
             }
-            else
+            else //if bool true
             {
                 Resume();
                 return;
@@ -120,23 +135,23 @@ namespace Settings
         }
         void ActivateCorrectPanels(int index) //take index of panel
         {
-            if (panels[0].activeSelf) //if HUD panel is active
+            if (panels[0].activeSelf) //if HUD/AnyKey panel is active
             {
                 for (int i = 0; i < panels.Length; i++) //for all panels
                 {
                     panels[i].SetActive(false); //disable them
                 }
                 panels[index].SetActive(true); //activate panel with given index
-                TogglePause();
+                return;
             }
-            else if (panels[index].activeSelf) //if referenced panel is active
+            if (panels[index].activeSelf || index == 0) //if referenced panel is active or referenced panel is HUD/AnyKey panel
             {
                 for (int i = 0; i < panels.Length; i++) //for all panels
                 {
                     panels[i].SetActive(false); //disable them
                 }
-                panels[0].SetActive(true); //enable HUD panel
-                TogglePause();
+                panels[0].SetActive(true); //enable HUD/AnyKey panel
+                return;
             }
         }
         #endregion
@@ -145,8 +160,7 @@ namespace Settings
         {
             if (Input.anyKeyDown)
             {
-                panels[1].SetActive(true);
-                panels[0].SetActive(false);
+                ActivateCorrectPanels(1);
             }
         }
         #endregion
