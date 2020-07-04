@@ -24,3 +24,10 @@ public enum AiBehaviour
     Patrolling,
     Chasing
 }
+public enum QuestState
+{
+    Available,
+    Active,
+    Complete,
+    Claimed
+}

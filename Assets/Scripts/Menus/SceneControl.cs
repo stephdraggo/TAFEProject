@@ -15,7 +15,7 @@ namespace Settings
         public string sceneName;
         public bool gamePaused;
         public GameObject[] panels;
-        //game scene panels: HUD, Pause, Options, Loading, Inventory, Quests, Death
+        //game scene panels: HUD, Pause, Options, Loading, Inventory, Quests, Death, Dialogue
         //menu scene panels: AnyKey, Main, Options, Loading
         [Header("Loading Screen")]
         public Image loadingPercentBar;
