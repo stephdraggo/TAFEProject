@@ -9,14 +9,15 @@ namespace Customisation
     public class Set : MonoBehaviour
     {
         #region Variables
+        [Header("Linked Objects")]
+        public Jim.Player player;
+        public GameObject addStatButtons, resetStatButtons;
+        public GameObject[] takeStatButtons;
         [Header("Character Class")]
         public CharacterClass characterClass = CharacterClass.Fighter;
-        public string[] selectedClass;
-        public int selectedClassIndex = 0; //what do??
-        public Jim.Player player;
         [Header("Dropdown Menu")]
         public Dropdown classDropdown;
-        public int statPoints;
+        public int statPoints = 6;
         [Header("Texture Lists")]
         public List<Texture2D> skin = new List<Texture2D>();
         public List<Texture2D> eyes, hair, mouth, clothes, armour = new List<Texture2D>();
@@ -31,8 +32,14 @@ namespace Customisation
         #endregion
         void Start()
         {
-            selectedClass = new string[] { "Fighter", "Rogue", "Witch" };
+            string[] selectedClass = new string[] { "Fighter", "Rogue", "Witch" };
+            string[] tempName = new string[] { "Strength", "Endurance", "Agility", "Charisma", "Aura", "Thought" };
+            for (int i = 0; i < tempName.Length; i++)
+            {
+                player.stats[i].name = tempName[i];
+            }
             TextureStart();
+            ChooseClass(0);
         }
         #region Functions
         #region Texture Functions
@@ -68,6 +75,12 @@ namespace Customisation
                 Texture2D tempTexture = Resources.Load("Character/Armour_" + i) as Texture2D;
                 armour.Add(tempTexture);
             }
+            SetTexture("Skin", 0);
+            SetTexture("Eyes", 0);
+            SetTexture("Hair", 0);
+            SetTexture("Mouth", 0);
+            SetTexture("Clothes", 0);
+            SetTexture("Armour", 0);
         }
         void SetTexture(string type, int dir)
         {
@@ -155,7 +168,77 @@ namespace Customisation
         {
             SetTexture(type, 1);
         }
+        public void TextureReset()
+        {
+            SetTexture("Skin", skinIndex = 0);
+            SetTexture("Eyes", eyesIndex = 0);
+            SetTexture("Mouth", mouthIndex = 0);
+            SetTexture("Hair", hairIndex = 0);
+            SetTexture("Clothes", clothesIndex = 0);
+            SetTexture("Armour", armourIndex = 0);
+        }
+        public void TextureRandom()
+        {
+            SetTexture("Skin", Random.Range(0, skinMax - 1));
+            SetTexture("Eyes", Random.Range(0, eyesMax - 1));
+            SetTexture("Mouth", Random.Range(0, mouthMax - 1));
+            SetTexture("Hair", Random.Range(0, hairMax - 1));
+            SetTexture("Clothes", Random.Range(0, clothesMax - 1));
+            SetTexture("Armour", Random.Range(0, armourMax - 1));
+        }
         #endregion
+        #region Stat Functions
+        public void StatPointsAdd(int index)
+        {
+            if (statPoints > 0) //if we have spare points
+            {
+                statPoints--; //take one
+                player.stats[index].tempValue++; //add one to stat
+                takeStatButtons[index].SetActive(true); //enable take button for that stat
+                resetStatButtons.SetActive(true); //make sure reset button is enabled
+                if (statPoints == 0) //if we have no more spare points
+                {
+                    addStatButtons.SetActive(false); //disable add stat buttons
+                }
+            }
+        }
+        public void StatPointsTake(int index)
+        {
+            if (player.stats[index].tempValue > 0) //test without (statPoints < 6 && ), if this stat has spare points assigned to it
+            {
+                statPoints++; //add to stock
+                player.stats[index].tempValue--; //take from stat
+                if (player.stats[index].tempValue == 0) //if this stat has no more spare points assigned to it
+                {
+                    addStatButtons.SetActive(true); //make sure adding stats is enabled
+                    takeStatButtons[index].SetActive(false); //disable take button for this stat
+                }
+            }
+            if (statPoints == 6) //if we have max spare stat points
+            {
+                resetStatButtons.SetActive(false); //disable reset button
+            }
+        }
+        public void StatPointsReset()
+        {
+            if (statPoints < 6) //if we don't have max spare points
+            {
+                statPoints = 6; //refill stats
+                addStatButtons.SetActive(true); //enable add stat buttons
+                resetStatButtons.SetActive(false); //disable reset button
+                for (int i = 0; i < player.stats.Length; i++) //for every stat
+                {
+                    player.stats[i].tempValue = 0; //remove extra points
+                    takeStatButtons[i].SetActive(false); //disable take button
+                }
+            }
+        }
+        #endregion
+        public void SaveAndPlay()
+        {
+            SaveCharacter();
+            SceneManager.LoadScene("GamePlay"); //replace this with reference to LoadAsync in Loading Script
+        }
         public void ChooseClass(int classIndex)
         {
             switch (classIndex)
@@ -199,6 +282,7 @@ namespace Customisation
             PlayerPrefs.SetInt("ArmourIndex", armourIndex);
 
             PlayerPrefs.SetString("CharacterName", player.characterName);
+            PlayerPrefs.SetString("CharacterClass", characterClass.ToString());
 
             for (int i = 0; i < player.stats.Length; i++)
             {
@@ -206,8 +290,6 @@ namespace Customisation
                 PlayerPrefs.SetInt(player.stats[i].name, player.stats[i].value);
             }
         }
-
-
         #endregion
     }
 }
