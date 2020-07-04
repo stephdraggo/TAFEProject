@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 namespace Customisation
 {
+    [AddComponentMenu("Game Systems/Customisation/Set")]
     public class Set : MonoBehaviour
     {
         #region Variables

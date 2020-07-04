@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+[AddComponentMenu("Game Systems/Don't Destroy")]
 public class DontDestroy : MonoBehaviour
 {
     void Awake()

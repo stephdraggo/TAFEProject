@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace Customisation
 {
+    [AddComponentMenu("Game Systems/Customisation/Get")]
     public class Get : MonoBehaviour
     {
         #region Variables

@@ -19,12 +19,11 @@ namespace Jim //it's life
         public bool usingKeybinds;
         public static bool isDead;
         public string[] baseKeys;
-        public Controls.Keybinds keybinds; //bool using saved keybinds
+        public Controls.Keybinds keybinds;
+        //need checkpoints
         [Header("Death")]
         public AudioSource deathSound;
         public AudioSource gameSound;
-        //need checkpoints
-        public string checkPoint;
         #endregion
         void Start()
         {

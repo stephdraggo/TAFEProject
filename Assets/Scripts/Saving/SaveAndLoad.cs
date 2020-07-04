@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Saving
 {
+    [AddComponentMenu("Game Systems/Saving/SaveAndLoad")]
     public class SaveAndLoad : MonoBehaviour
     {
         public Jim.Player player;
