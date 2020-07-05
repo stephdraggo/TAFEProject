@@ -20,6 +20,7 @@ namespace Jim //it's life
         public static bool isDead;
         public string[] baseKeys;
         public Controls.Keybinds keybinds;
+        public Quest.Control quest;
         //need checkpoints
         [Header("Death")]
         public AudioSource deathSound;

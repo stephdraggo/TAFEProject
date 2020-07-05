@@ -30,7 +30,7 @@ namespace Quest
         {
             quest.questState = QuestState.Active;
             questWindow.SetActive(false);
-            player.quest = quest;
+            player.quest = quest; //set player's quest to this quest
         }
     }
 }

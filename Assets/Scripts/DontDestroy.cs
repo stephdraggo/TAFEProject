@@ -31,3 +31,9 @@ public enum QuestState
     Complete,
     Claimed
 }
+public enum GoalType
+{
+    Kill,
+    Gather,
+    Locate
+}
