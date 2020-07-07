@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//will break if only one dialogueText
 namespace Dialogue
 {
     [AddComponentMenu("Game Systems/Dialogue/Control")]
     public class Control : MonoBehaviour
     {
         #region Variables
-        public Text currentDialogue, buttonText, npcNameText;
-        public bool showDialogue;
+        public Text currentDialogue, npcNameText;
+        public bool showDialogue; //do we need this??
         public int index;
         public string[] dialogueText;
         public string npcName;
-        public Button proceedButton;
+        public GameObject nextButton, byeButton;
 
 
         #endregion
@@ -27,7 +28,17 @@ namespace Dialogue
         {
             index = 0; //reset dialogue progress
             npcNameText.text = npcName; //NPC name tag
-            buttonText.text = "Next"; //default proceed text
+            if (dialogueText.Length <= 1) //if only one dialogue text
+            {
+                nextButton.SetActive(false); //disable next
+                byeButton.SetActive(true); //enable bye
+            }
+            else
+            {
+                nextButton.SetActive(true); //enable next
+                byeButton.SetActive(false); //disable bye
+            }
+
         }
 
         void Update()
@@ -35,19 +46,16 @@ namespace Dialogue
             currentDialogue.text = dialogueText[index]; //update dialogue text according to index
         }
 
-        public void Next() //attach to proceed button, also redo entirely
+        public void Next()
         {
-            if (!(index < dialogueText.Length - 1)) //if we haven't reached the last dialogue
+            if (index == dialogueText.Length - 1) //if on last text
             {
-                index++; //move to next index
-                if (index < dialogueText.Length - 1) //this is a mess, redo
-                {
-                    buttonText.text = "Bye";
-                }
+                nextButton.SetActive(false); //disable next
+                byeButton.SetActive(true); //enable bye
             }
             else
             {
-                buttonText.text = "Next";
+                index++; //next text
             }
         }
     }

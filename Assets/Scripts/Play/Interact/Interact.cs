@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
 namespace Controls
 {
     [AddComponentMenu("Game Systems/Controls/Interact")]
@@ -42,7 +42,7 @@ namespace Controls
                             Camera.main.GetComponent<MouseLook>().enabled = false; //explain?
                             GetComponent<MouseLook>().enabled = false; //explain?
                         }
-                        /*
+                        
                         if (hitInfo.collider.GetComponent<OptionLinearDialogue>())
                         {
                             hitInfo.collider.GetComponent<OptionLinearDialogue>().showDlg = true;
@@ -67,7 +67,7 @@ namespace Controls
                             Camera.main.GetComponent<MouseLock>().enabled = false;
                             GetComponent<MouseLock>().enabled = false;
                         }
-                        */
+                        
                     }
                     #endregion
                     #region Item
@@ -103,3 +103,5 @@ namespace Controls
         #endregion
     }
 }
+
+*/

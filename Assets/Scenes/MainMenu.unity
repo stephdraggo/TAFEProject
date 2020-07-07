@@ -134,8 +134,6 @@ GameObject:
   - component: {fileID: 94924530}
   - component: {fileID: 94924529}
   - component: {fileID: 94924534}
-  - component: {fileID: 94924533}
-  - component: {fileID: 94924535}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -219,73 +217,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &94924533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 94924528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4312d983521e8b04bad6c8ddf7c13971, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterName: Roxy
-  behaviour: 0
-  moveSpeed: 5
-  aggroRadius: 3
-  attackRadius: 1
-  speedBonus: 0
-  lifeForce:
-  - name: Health
-    maxValue: 50
-    currentValue: 45
-    regenValue: 1
-    displayImage: {fileID: 0}
-  - name: Mana
-    maxValue: 40
-    currentValue: 30
-    regenValue: 1
-    displayImage: {fileID: 0}
-  - name: Stamina
-    maxValue: 100
-    currentValue: 80
-    regenValue: 5
-    displayImage: {fileID: 0}
-  stats:
-  - name: Strength
-    value: 2
-    tempValue: 0
-  - name: Endurance
-    value: 2
-    tempValue: 0
-  - name: Agility
-    value: 2
-    tempValue: 0
-  - name: Charisma
-    value: 2
-    tempValue: 0
-  - name: Aura
-    value: 2
-    tempValue: 0
-  - name: Thought
-    value: 2
-    tempValue: 0
-  characterController: {fileID: 0}
-  jumpSpeed: 8
-  crouchSpeed: 2
-  sprintSpeed: 10
-  gravity: 100
-  horizontal: 0
-  vertical: 0
-  usingKeybinds: 0
-  baseKeys: []
-  keybinds: {fileID: 1894978095}
-  deathSound: {fileID: 0}
-  gameSound: {fileID: 0}
-  deathPanel: {fileID: 0}
-  hudPanel: {fileID: 0}
 --- !u!143 &94924534
 CharacterController:
   m_ObjectHideFlags: 0
@@ -304,22 +235,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &94924535
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 94924528}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e060bf19b3c3a6244b5a052b72113c68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  axis: 0
-  sensitivity: 100
-  minY: -60
-  maxY: 60
 --- !u!1 &173675524
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,6 +287,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -686,7 +602,6 @@ GameObject:
   - component: {fileID: 794118655}
   - component: {fileID: 794118654}
   - component: {fileID: 794118653}
-  - component: {fileID: 794118657}
   m_Layer: 0
   m_Name: Predator
   m_TagString: Predator
@@ -768,37 +683,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &794118657
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 794118652}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00a42ca4c8841f54f8c2e6fa6bb0ab4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterName: fox 1
-  behaviour: 0
-  moveSpeed: 5
-  aggroRadius: 10
-  attackRadius: 1
-  speedBonus: 0
-  attackDamage: 0
-  territoryPatrol: []
-  lifeForce:
-  - name: Health
-    maxValue: 20
-    currentValue: 15
-    regenValue: 0
-    displayImage: {fileID: 0}
-  - name: Stamina
-    maxValue: 10
-    currentValue: 10
-    regenValue: 1
-    displayImage: {fileID: 0}
 --- !u!1 &811027470
 GameObject:
   m_ObjectHideFlags: 0
@@ -886,7 +770,6 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
-  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -959,22 +842,6 @@ Transform:
   m_Father: {fileID: 94924532}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -33.41, z: 0}
---- !u!114 &963194229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e060bf19b3c3a6244b5a052b72113c68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  axis: 1
-  sensitivity: 100
-  minY: -60
-  maxY: 60
 --- !u!1 &1558938104
 GameObject:
   m_ObjectHideFlags: 0
@@ -1027,6 +894,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1203,6 +1071,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1233,8 +1102,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1894978096}
-  - component: {fileID: 1894978095}
-  - component: {fileID: 1894978097}
   m_Layer: 0
   m_Name: Bag of Holding (scripts go here)
   m_TagString: Untagged
@@ -1242,59 +1109,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1894978095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1894978094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e48946bb158adc5449c373124b15c65c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentKey: {fileID: 0}
-  selectKey:
-    serializedVersion: 2
-    rgba: 0
-  changeKey:
-    serializedVersion: 2
-    rgba: 0
-  baseKeys:
-  - keyName: 
-    keyDisplayText: {fileID: 0}
-    defaultKey: 
-  - keyName: 
-    keyDisplayText: {fileID: 0}
-    defaultKey: 
-  - keyName: 
-    keyDisplayText: {fileID: 0}
-    defaultKey: 
-  - keyName: 
-    keyDisplayText: {fileID: 0}
-    defaultKey: 
-  - keyName: 
-    keyDisplayText: {fileID: 0}
-    defaultKey: 
-  - keyName: 
-    keyDisplayText: {fileID: 0}
-    defaultKey: 
-  - keyName: 
-    keyDisplayText: {fileID: 0}
-    defaultKey: 
-  - keyName: 
-    keyDisplayText: {fileID: 0}
-    defaultKey: 
-  - keyName: 
-    keyDisplayText: {fileID: 0}
-    defaultKey: 
-  - keyName: 
-    keyDisplayText: {fileID: 0}
-    defaultKey: 
-  - keyName: 
-    keyDisplayText: {fileID: 0}
-    defaultKey: 
 --- !u!4 &1894978096
 Transform:
   m_ObjectHideFlags: 0
@@ -1309,28 +1123,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1894978097
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1894978094}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03cc3254636f45049a650cc84b1d70e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gamePaused: 0
-  panels:
-  - {fileID: 2093522078}
-  - {fileID: 1956498616}
-  - {fileID: 1739632528}
-  - {fileID: 0}
-  - {fileID: 173675524}
-  - {fileID: 1558938104}
-  loadingPercentBar: {fileID: 0}
-  loadingPercentText: {fileID: 0}
 --- !u!1 &1956498616
 GameObject:
   m_ObjectHideFlags: 0
@@ -1383,6 +1175,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -1456,6 +1249,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []

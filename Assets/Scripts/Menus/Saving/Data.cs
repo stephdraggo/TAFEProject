@@ -4,7 +4,7 @@
     public class Data
     {
         //game variables that get saved
-        public string playerName, checkPoint;
+        public string playerName, checkPoint; //checkpoint not blocked out yet
         public int level;
         public float[] statusMaxValues, statusCurrentValues = new float[3]; //health mana stamina, does this make both 3 long?
         public float pX, pY, pZ, rX, rY, rZ, rW, currentExp, neededExp, maxExp; //position rotation experience
@@ -35,3 +35,4 @@
             maxExp = player.maxExp;
         }
     }
+}
