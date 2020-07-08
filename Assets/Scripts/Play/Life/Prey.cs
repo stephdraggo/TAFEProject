@@ -29,12 +29,21 @@ namespace Jim //it's life
             //else
             //wander
         }
+        void LateUpdate()
+        {
+            RegenLifeForce(lifeForce[0]); //regen health
+            RegenLifeForce(lifeForce[1]); //regen stamina
+        }
         #region Behaviours
         void Hide()
         {
+            if (behaviour != AiBehaviour.Hidden) //update state
+            {
+                behaviour = AiBehaviour.Hidden;
+            }
             speedBonus = false;
         }
-        void OffsetPursuit() //idk what this one means so idk wether for prey or predator
+        void OffsetPursuit() //idk what this one means so idk whether for prey or predator
         {
 
         }
