@@ -36,11 +36,15 @@ namespace Jim //it's life
             {
                 behaviour = AiBehaviour.Wandering;
             }
-            speedBonus = false;
-        }
-        public void AvoidCollision()
-        {
 
+            speedBonus = false;
+
+            Vector3 randomDirection = new Vector3(UnityEngine.Random.Range(-1, 1), 0, UnityEngine.Random.Range(-1, 1)); //have to specify library bc ambiguous with System
+            transform.position = Vector3.MoveTowards(transform.position, randomDirection, moveSpeed * Time.deltaTime); //move
+        }
+        public void AvoidCollision(GameObject target)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, -target.transform.position, moveSpeed * Time.deltaTime); //move away from target
         }
         public void Flee(GameObject target)
         {
@@ -48,34 +52,39 @@ namespace Jim //it's life
             {
                 behaviour = AiBehaviour.Fleeing;
             }
-            speedBonus = true;
-        }
-        public void Evade(GameObject target)
-        {
-            speedBonus = true;
-        }
-        public void TakeDamage(GameObject attacker)
-        {
 
+            speedBonus = true;
+
+            transform.position = Vector3.MoveTowards(transform.position, -target.transform.position, moveSpeed * Time.deltaTime); //move away from target
         }
         #endregion
-        #region miscelaneous functions
+        #region miscellaneous functions
         public void FindClosestCreature()
         {
             //figure out how to find closest creature
             //closestCreature cannot be hidden
-        }
 
-        public void RegenLifeForce(LifeForce lifeForce)
+            //culling group?
+        }
+        public void MoveInTargetDirection(GameObject target) //doubles as flock maybe?
         {
-            if (lifeForce.currentValue < lifeForce.maxValue) //if below max
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, moveSpeed * Time.deltaTime); //move towards target
+        }
+        public void RegenLifeForce(LifeForce i)
+        {
+            if (i.currentValue < i.maxValue) //if below max
             {
-                lifeForce.currentValue += lifeForce.regenValue * Time.deltaTime; //increase, will this time thing work?
+                i.currentValue += i.regenValue * Time.deltaTime; //increase
             }
-            if (lifeForce.currentValue > lifeForce.maxValue) //if above max
+            if (i.currentValue > i.maxValue) //if above max
             {
-                lifeForce.currentValue = lifeForce.maxValue; //set to max
+                i.currentValue = i.maxValue; //set to max
             }
+        }
+        public void KillCreature()
+        {
+            //add loot and murderer here
+            Destroy(gameObject); //kill creature
         }
         #endregion
     }

@@ -21,7 +21,7 @@ namespace Jim //it's life
         public string[] baseKeys;
         public Controls.Keybinds keybinds;
         public Quest.Control quest;
-        //need checkpoints
+        public Transform checkPoint; //I don't think this is right, but it quieted the errors
         [Header("Death")]
         public AudioSource deathSound;
         public AudioSource gameSound;

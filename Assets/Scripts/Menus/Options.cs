@@ -15,6 +15,7 @@ namespace Settings
         public Resolution[] resolutions;
         public AudioMixer audioControl;
         public AudioSource audioSource;
+        public AudioClip clicks;
         public bool muted, savedOptions; //fullscreen?
         public SceneControl sceneControl; //may not be needed, see Start
         #endregion

@@ -321,7 +321,6 @@ GameObject:
   - component: {fileID: 243272471}
   - component: {fileID: 243272470}
   - component: {fileID: 243272469}
-  - component: {fileID: 243272473}
   m_Layer: 0
   m_Name: Prey
   m_TagString: Prey
@@ -403,35 +402,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &243272473
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 243272468}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c383de20ccc49a543980275b81066f4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  characterName: rabbit 1
-  behaviour: 0
-  moveSpeed: 6
-  aggroRadius: 7
-  attackRadius: 1
-  speedBonus: 0
-  lifeForce:
-  - name: Health
-    maxValue: 10
-    currentValue: 10
-    regenValue: 0
-    displayImage: {fileID: 0}
-  - name: Stamina
-    maxValue: 20
-    currentValue: 20
-    regenValue: 2
-    displayImage: {fileID: 0}
 --- !u!1 &622027510
 GameObject:
   m_ObjectHideFlags: 0

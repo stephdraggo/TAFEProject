@@ -21,26 +21,41 @@ namespace Jim //it's life
 
         void Update()
         {
+            if (lifeForce[0].currentValue <= 0) //if no health
+            {
+                KillCreature();
+            }
+
             FindClosestCreature();
 
             DetermineSpeed();
 
             MoveBehaviour();
-        }
 
-        void LateUpdate()
-        {
             RegenLifeForce(lifeForce[0]); //regen health
             RegenLifeForce(lifeForce[1]); //regen stamina
         }
+
         #region Behaviours
         void MoveBehaviour()
         {
+            //if grounded, but not that
             if (lifeForce[0].currentValue < lifeForce[0].maxValue / 4)//if health below 25%
             {
                 if (Vector3.Distance(transform.position, player.transform.position) <= aggroRadius) //if in aggro radius of player
                 {
                     Flee(player); //flee from player
+                }
+                else if (Vector3.Distance(transform.position, closestCreature.transform.position) <= aggroRadius / 3) //if prey in 1/3 aggro radius
+                {
+                    if (Vector3.Distance(transform.position, closestCreature.transform.position) <= attackRadius) //if prey in attack radius
+                    {
+                        Attack(closestCreature);
+                    }
+                    else
+                    {
+                        Chase(closestCreature);
+                    }
                 }
                 else
                 {
@@ -49,7 +64,7 @@ namespace Jim //it's life
             }
             else if (Vector3.Distance(transform.position, closestCreature.transform.position) <= aggroRadius) //if prey/player in aggro radius
             {
-                if (Vector3.Distance(transform.position, closestCreature.transform.position) <= attackRadius /*&& not evading*/) //if prey/player in attack radius
+                if (Vector3.Distance(transform.position, closestCreature.transform.position) <= attackRadius) //if prey/player in attack radius
                 {
                     Attack(closestCreature);
                 }
@@ -65,15 +80,12 @@ namespace Jim //it's life
         }
         public void DetermineSpeed()
         {
-            //if no stamina
-            //normalspeed
-            //
-            //
-            if (speedBonus) //fast
+            if (speedBonus && lifeForce[1].currentValue > 1) //if fast and stamina
             {
                 moveSpeed = fastSpeed;
+                lifeForce[1].currentValue -= lifeForce[1].regenValue * 4 * Time.deltaTime; //use stamina when fast
             }
-            else //normal
+            else //default
             {
                 moveSpeed = normalSpeed;
             }
@@ -93,7 +105,7 @@ namespace Jim //it's life
             }
             else
             {
-                transform.position = Vector3.MoveTowards(transform.position, territoryPatrol[patrolIndex].transform.position, moveSpeed * Time.deltaTime); //move towards target
+                MoveInTargetDirection(territoryPatrol[patrolIndex]);
                 if (Vector3.Distance(transform.position, territoryPatrol[patrolIndex].transform.position) <= 0.01f) //if close enough 
                 {
                     patrolIndex++; //move to next patrol location
@@ -110,7 +122,7 @@ namespace Jim //it's life
 
             speedBonus = true; //speed bonus while chasing
 
-            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, moveSpeed * Time.deltaTime); //move towards target
+            MoveInTargetDirection(target);
         }
         void Attack(GameObject target)
         {
@@ -126,6 +138,7 @@ namespace Jim //it's life
             }
 
             lifeForce[0].currentValue += attackDamage / 5; //heal according to 1/5 damage dealt
+            lifeForce[1].currentValue -= lifeForce[1].maxValue / 5; //use up 1/5 max stamina
         }
         void OffsetPursuit() //idk what this one means so idk whether for prey or predator
         {
